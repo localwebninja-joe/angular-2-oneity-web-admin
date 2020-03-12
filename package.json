@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build && rm -f ../../public/*.js; rm -f ../../public/*.css; rm -f ../../public/*.ico; cp -rf dist/angular2oneitywebadmin/* ../../public/;",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
