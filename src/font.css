@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url('./assets/fonts/sourcesanspro/sourcesanspro-light.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url('./assets/fonts/sourcesanspro/sourcesanspro.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url('./assets/fonts/sourcesanspro/sourcesanspro-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'GillSansMT';
+  src: url('./assets/fonts/gillsansmt/GillSansMT.eot?#iefix') format('embedded-opentype'),  url('./assets/fonts/gillsansmt/GillSansMT.woff') format('woff'), url('./assets/fonts/gillsansmt/GillSansMT.ttf')  format('truetype'), url('./assets/fonts/gillsansmt/GillSansMT.svg#GillSansMT') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Geomancy-ExtraBold';
+  src: url('./assets/fonts/geomancy/Geomancy-ExtraBold.eot?#iefix') format('embedded-opentype'),  url('./assets/fonts/geomancy/Geomancy-ExtraBold.otf')  format('opentype'),
+       url('./assets/fonts/geomancy/Geomancy-ExtraBold.woff') format('woff'), url('./assets/fonts/geomancy/Geomancy-ExtraBold.ttf')  format('truetype'), url('./assets/fonts/geomancy/Geomancy-ExtraBold.svg#Geomancy-ExtraBold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaLTStd-Bold';
+  src: url('./assets/fonts/helvetica/HelveticaLTStd-Bold.eot?#iefix') format('embedded-opentype'),  url('./assets/fonts/helvetica/HelveticaLTStd-Bold.otf')  format('opentype'),
+       url('./assets/fonts/helvetica/HelveticaLTStd-Bold.woff') format('woff'), url('./assets/fonts/helvetica/HelveticaLTStd-Bold.ttf')  format('truetype'), url('./assets/fonts/helvetica/HelveticaLTStd-Bold.svg#HelveticaLTStd-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HelveticaLTStd-Roman';
+  src: url('./assets/fonts/helvetica/HelveticaLTStd-Roman.eot?#iefix') format('embedded-opentype'),  url('./assets/fonts/helvetica/HelveticaLTStd-Roman.otf')  format('opentype'),
+       url('./assets/fonts/helvetica/HelveticaLTStd-Roman.woff') format('woff'), url('./assets/fonts/helvetica/HelveticaLTStd-Roman.ttf')  format('truetype'), url('./assets/fonts/helvetica/HelveticaLTStd-Roman.svg#HelveticaLTStd-Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

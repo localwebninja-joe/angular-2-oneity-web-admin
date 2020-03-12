@@ -1,0 +1,33 @@
+<bc-layout (navigate)="closeSidenav()">
+    <bc-toolbar (openMenu)="openSidenav()" *ngIf="loggedIn$ | async">
+        <span class="fill-remaining-space"></span>
+        <span>
+            <button mat-button [matMenuTriggerFor]="menu">
+                <img [src]="(user$ | async).photo" alt="." class="header-user-avatar" >
+                {{(user$ | async).name}}
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+                </button>
+            </mat-menu>
+        </span>
+    </bc-toolbar>
+    <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()" *ngIf="loggedIn$ | async" disableClose>
+        <div *ngIf="loggedIn$ | async" class="navbar-brand text-lt">
+            <!--<i class="fa fa-btc"></i>-->
+            <img src="assets/images/logo-oneity.png" alt=".">
+            <span class="hidden-folded m-l-xs txt-logo">Oneity
+            <span>Admin</span>
+            </span>
+        </div>
+        <ng-container *ngFor="let menu of (settings$ | async).menus">
+            <bc-nav-item  (navigate)="closeSidenav()" [routerLink]="menu.link" [icon]="menu.icon" *ngIf="(loggedIn$ | async)">
+                {{menu.name}}
+            </bc-nav-item>
+        </ng-container>
+    </bc-sidenav>
+    <router-outlet>
+    </router-outlet>
+</bc-layout>

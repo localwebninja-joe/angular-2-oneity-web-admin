@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-title>
+      <a href class="navbar-brand block m-t">
+        <img src="assets/img/logo.png" alt="." style="position:relative;">
+      </a>
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <p>
+          <mat-form-field >
+            <input
+              type="text"
+              matInput
+              placeholder="Email"
+              formControlName="username"
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+            />
+          </mat-form-field>
+        </p>
+        <p class="loginButton">
+          <button type="submit" mat-flat-button color="primary" >
+            Login
+          </button>
+        </p>
+      </form>
+      <p class="socialButtons">
+        <button mat-icon-button class="facebook" aria-label="Social Media icon-button with a facebook icon" (click)="socialSubmit('facebook')">
+          <fa-icon [icon]="socialMediaButtons.facebook"></fa-icon>
+        </button>
+        <button mat-icon-button aria-label="icon-button with a twitter icon" (click)="socialSubmit('twitter')" >
+          <fa-icon [icon]="socialMediaButtons.twitter"></fa-icon>
+        </button>
+        <button mat-icon-button aria-label="icon-button with a linkedin icon" (click)="socialSubmit('linkedin')"  >
+          <fa-icon [icon]="socialMediaButtons.linkedin"></fa-icon>
+        </button>
+        <button mat-icon-button aria-label="icon-button with a instagran icon" svgIcon="facebook-f" (click)="socialSubmit('instagram')" >
+          <fa-icon [icon]="socialMediaButtons.instagram"></fa-icon>
+        </button>
+        <button mat-icon-button aria-label="icon-button with a google icon" (click)="socialSubmit('google')" >
+          <fa-icon [icon]="socialMediaButtons.googlePlus"></fa-icon>
+        </button>
+      </p>
+      <div class="registerButton">
+        <button mat-flat-button color="primary" routerLink="/register">
+          Register
+        </button>
+      </div>
+      <p *ngIf="errorMessage" class="loginError">
+        {{ errorMessage }}
+      </p>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,262 @@
+<mat-card>
+    <mat-card-title>
+      <a href class="navbar-brand block m-t">
+        <img src="assets/img/logo.png" alt="." style="position:relative;">
+      </a>
+      <h3>Register</h3>
+    </mat-card-title>
+    <mat-card-content>      
+      <mat-horizontal-stepper labelPosition="bottom" linear=true #stepper>
+        <mat-step [stepControl]="basic">
+          <ng-container *ngIf="userRegistrationFields">
+            <form #f="ngForm" [formGroup]="basic" >
+              <ng-template matStepLabel>Basic Info</ng-template>
+              <small class="text-primary-lt font-bold">Languages you able to speak fluently <span class="text-danger">*</span></small>
+              <mat-form-field class="language-chip-list" >
+                <mat-chip-list #chipList aria-label="Language selection" aria-orientation="vertical">
+                  <mat-chip
+                    *ngFor="let language of languages1"
+                    [selectable]="selectable"
+                    [removable]="removable"
+                    (removed)="remove(language)">
+                    {{language}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    [placeholder]="userRegistrationFields.language_id.title"
+                    #languageInput
+                    [formControl]="languageCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                    required
+                  />
+                </mat-chip-list>
+                <mat-error *ngIf="f.form.controls['languageCtrl']?.errors?.required">Required Field</mat-error>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" >
+                  <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
+                    {{language}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small class="text-primary-lt font-bold">Personal Information</small>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{userRegistrationFields.firstname.title}}</mat-label>
+                  <input matInput [type]="userRegistrationFields.firstname.type" [placeholder]="userRegistrationFields.firstname.title" formControlName="firstname" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.lastname.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.lastname.type" [placeholder]="userRegistrationFields.lastname.title" formControlName="lastname" required>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.middlename.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.middlename.type" [placeholder]="userRegistrationFields.middlename.title" formControlName="middlename">
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.gender.title }}</mat-label>
+                  <select matNativeControl formControlName="gender" required>
+                    <option value="" selected disabled>{{ userRegistrationFields.gender.title }}</option>
+                    <option 
+                      *ngFor="let optional of userRegistrationFields.gender.optional_values" 
+                      [value]="optional"
+                    >{{optional}}</option>
+                  </select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.marital_status.title }}</mat-label>
+                  <select matNativeControl formControlName="marital_status" required>
+                    <option value="" selected disabled>{{ userRegistrationFields.marital_status.title }}</option>
+                    <option 
+                      *ngFor="let optional of userRegistrationFields.marital_status.optional_values" 
+                      [value]="optional.value"
+                    >{{optional.text}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field class="full-width">
+                  <mat-label>{{ userRegistrationFields.dob.title }}</mat-label>
+                  <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="dob" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                  <!--
+                  <tel-input matInput [placeholder]="userRegistrationFields.mobile.title" formControlName="mobile" required></tel-input>
+                   -->
+                  <mat-label>{{ userRegistrationFields.mobile.title }}</mat-label>
+                  <ngx-mat-intl-tel-input
+                  [preferredCountries]="['us', 'mx']"
+                  [enablePlaceholder]="true"
+                  [enableSearch]="true"
+                  name="mobile"
+                  formControlName="mobile" #mobile></ngx-mat-intl-tel-input>
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <!-- <mat-hint>e.g. {{mobile.selectedCountry.placeHolder}}</mat-hint> -->
+                  <mat-error *ngIf="f.form.controls['mobile']?.errors?.required">Required Field</mat-error>
+                  <mat-error *ngIf="f.form.controls['mobile']?.errors?.validatePhoneNumber">Invalid Number</mat-error>
+                </mat-form-field>
+
+              </div>
+              <small class="text-primary-lt font-bold">Personal Information</small>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.username.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.username.type" [placeholder]="userRegistrationFields.username.title" formControlName="username" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.email.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.email.type" [placeholder]="userRegistrationFields.email.title" formControlName="email" required>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.password.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.password.type" [placeholder]="userRegistrationFields.password.title" formControlName="password" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.c_password.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.c_password.type" [placeholder]="userRegistrationFields.c_password.title" formControlName="c_password" required>
+                </mat-form-field>
+              </div>
+              <small class="text-primary-lt font-bold">{{ userRegistrationFields.address.title}}</small>
+              <div class="form-container">
+                <mat-form-field *ngIf="countries">
+                  <mat-label>{{ userRegistrationFields.country_id.title }}</mat-label>
+                  <select matNativeControl [placeholder]="userRegistrationFields.country_id.title" formControlName="country_id" required>
+                    <option 
+                      *ngFor="let country of countries" 
+                      [value]="country.guid"
+                    >{{country.name}}</option>
+                  </select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.state.title }}</mat-label>
+                  <select matNativeControl [placeholder]="userRegistrationFields.state.title" formControlName="state" required>
+                    <option value="baja california">Baja California</option>
+                    <option value="baja california sur">Baja California Sur</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field style="width: 100% !important;">
+                  <mat-label>{{ userRegistrationFields.street.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.street.type" [placeholder]="userRegistrationFields.street.title" formControlName="street" required>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.city.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.city.type" [placeholder]="userRegistrationFields.city.title" formControlName="city" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.postal_code.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.postal_code.type" [placeholder]="userRegistrationFields.postal_code.title" formControlName="postal_code" required>
+                </mat-form-field>
+              </div>
+              <small class="text-primary-lt font-bold">{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.title }}</small>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_firstname.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_firstname.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_firstname.title" formControlName="ec_firstname" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_lastname.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_lastname.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_lastname.title" formControlName="ec_lastname" required>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_email.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_email.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_email.title" formControlName="ec_email" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <!-- <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_mobile.title }}</mat-label>
+                  <tel-input matInput [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_mobile.title" formControlName="ec_mobile" required></tel-input>
+                  <mat-icon matSuffix>phone</mat-icon> -->
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.emergency_contact.fields.emergency_contact_mobile.title }}</mat-label>
+                  <ngx-mat-intl-tel-input
+                  [preferredCountries]="['us', 'gb', 'mx']"
+                  [onlyCountries]="['us', 'gb', 'es', 'mx']"
+                  [enablePlaceholder]="true"
+                  [enableSearch]="true"
+                  name="ec_mobile"
+                  formControlName="ec_mobile" #ec_mobile></ngx-mat-intl-tel-input>
+                  <mat-icon matSuffix>phone</mat-icon>
+                  <!-- <mat-hint>e.g. {{ec_mobile.selectedCountry.placeHolder}}</mat-hint> -->
+                  <mat-error *ngIf="f.form.controls['ec_mobile']?.errors?.required">Required Field</mat-error>
+                  <mat-error *ngIf="f.form.controls['ec_mobile']?.errors?.validatePhoneNumber">Invalid Number</mat-error>
+                </mat-form-field>
+              </div>
+              <small class="text-primary-lt font-bold">{{userRegistrationFields.parent_or_guardian_information.fields.school.title}}</small>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.highest_school_attended.title }}</mat-label>
+                  <select matNativeControl formControlName="highest_school" required>
+                    <option value="" selected="" disabled="">{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.highest_school_attended.title }}</option>
+                    <option value="Middle School">Middle School</option>
+                    <option value="High School">High School</option>
+                    <option value="Graduate">Graduate</option>
+                    <option value="Post Graduate">Post Graduate</option>
+                  </select>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_name.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_name.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_name.title" formControlName="school_name" required>
+                </mat-form-field>
+              </div>
+              <div class="form-container">
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_start_year.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_start_year.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_start_year.title" formControlName="start_year" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>{{ userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_end_year.title }}</mat-label>
+                  <input matInput [type]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_end_year.type" [placeholder]="userRegistrationFields.parent_or_guardian_information.fields.school.fields.school_end_year.title" formControlName="end_year" required>
+                </mat-form-field>
+              </div>
+              <div>
+                <button mat-button matStepperNext mat-flat-button color="primary">Save and Continue</button>
+              </div>
+            </form>
+          </ng-container>
+        </mat-step>
+        <mat-step [stepControl]="individual">
+          <form [formGroup]="individual" (ngSubmit)="submit()" *ngIf="userRegistrationFields">
+            <ng-template matStepLabel>Individual</ng-template>
+            <small class="text-primary-lt font-bold">{{ userRegistrationFields.promotion_id.title}}</small>
+              <mat-form-field>
+                <mat-label>{{ userRegistrationFields.promotion_id.title }}</mat-label>
+                <input matInput [type]="userRegistrationFields.promotion_id.type" [placeholder]="userRegistrationFields.promotion_id.title" formControlName="promotion_id" required>
+              </mat-form-field>
+            <div class="form-container">
+                <mat-label>{{userRegistrationFields.i_have_company.title}}</mat-label>
+                <mat-radio-group aria-label="Select an option" class="radio-group" formControlName="i_have_company">
+                  <mat-radio-button
+                  class="radio-button"
+                    *ngFor="let optional_value of userRegistrationFields.i_have_company.optional_values" 
+                    [value]="optional_value.value"
+                    >{{optional_value.text}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button type="submit">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <ng-template matStepperIcon="basic">
+          <mat-icon>cog</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="individual">
+          <mat-icon>user</mat-icon>
+        </ng-template>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>

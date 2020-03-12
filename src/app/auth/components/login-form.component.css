@@ -1,0 +1,43 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 72px 0;
+  }
+  .mat-card-content {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 400px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  .loginError {
+    padding: 16px;
+    border-radius: 5px;
+    width: 100%;
+    color: white;
+    background-color: red;
+  }
+
+  .loginButton,
+  .registerButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .registerButton button,
+  .loginButton button {
+    width: 100%;
+  }
+  .socialButtons button {
+    width: 20%;
+  }

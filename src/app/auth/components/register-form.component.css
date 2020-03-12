@@ -1,0 +1,64 @@
+  :host {
+    display: flex;
+    justify-content: center;
+    margin: 72px 0;
+  }
+  .language-chip-list {
+    width: 100%;
+  }
+
+  mat-card-title {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+  }
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+  .text-primary-lt {
+    color: #8278c2;
+  }
+  .font-bold {
+    font-weight: 700;
+  }
+  .text-danger {
+    color: #f05050;
+}
+  .form-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+    margin-top: 16px;
+  }
+  
+  .form-container .mat-form-field {
+    width: calc(50% - 4px);
+  }
+  
+  .form-container form {
+    margin-bottom: 20px;
+  }
+  
+  .form-container form > * {
+    margin: 5px 0;
+  }
+  
+  .form-container .mat-radio-button {
+    margin: 0 12px;
+  }
+
+  .registerError {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }

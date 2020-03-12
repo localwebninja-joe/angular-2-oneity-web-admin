@@ -1,0 +1,71 @@
+{ "settings": {
+        "menus": [
+            
+            {
+                "name" : "Post Registration Letter",
+                "link" : "/",
+                "icon" : "menu_book"
+            },{
+                "name" : "Reporting and Analytics",
+                "link" : "/app/reporting-analytics",
+                "icon" : "timeline"
+            },{
+                "name" : "Group Transportation",
+                "link" : "/app/group-transportation-routes",
+                "icon" : "timeline"
+            },{
+                "name" : "Page Settings",
+                "link" : "/app/page-settings",
+                "icon" : "settings"
+            },{
+                "name" : "Services List Available",
+                "link" : "/app/services-list-available",
+                "icon" : "list"
+            },{
+                "name" : "Hierarchy Settings",
+                "link" : "/app/companies",
+                "icon" : "map"
+            },{
+                "name" : "Technical Settings",
+                "link" : "/app/technical-settings",
+                "icon" : "technical"
+            },{
+                "name" : "Country Settings",
+                "link" : "/app/country-settings",
+                "icon" : "technical"
+            },{
+                "name" : "Security Settings",
+                "link" : "/app/security-settings",
+                "icon" : "resource"
+            },{
+                "name" : "Referral Credits",
+                "link" : "/app/referral-credits",
+                "icon" : "btc"
+            },{
+                "name" : "Translate Settings",
+                "link" : "/app/translate-settings",
+                "icon" : "Resource"
+            },{
+                "name" : "User Management",
+                "link" : "/app/users",
+                "icon" : "user"
+            },{
+                "name" : "Asset Management",
+                "link" : "/app/assets",
+                "icon" : "badge"
+            },{
+                "name" : "Trash",
+                "link" : "/app/trash",
+                "icon" : "trash"
+            },{
+                "name" : "Members",
+                "link" : "/app/members",
+                "icon" : "users"
+            },{
+                "name" : "Registration Approval",
+                "link" : "/app/users-approval",
+                "icon" : "user"
+            }
+        ]
+    }
+}
